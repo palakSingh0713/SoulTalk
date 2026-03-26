@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
 const register = async (name, email, password, securityQuestion, securityAnswer) => {
   try {
-   const response = await fetch('https://soultalk-api.ct.ws/soulapp/php/soulapp/php/register.php', {
+   const response = await fetch('https://soultalk-api.ct.ws/soulapp/php/register.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
