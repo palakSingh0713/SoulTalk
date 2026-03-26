@@ -19,7 +19,7 @@ const Marketplace = () => {
 
   const loadCharacters = async () => {
     try {
-      const response = await fetch(`http://localhost/soulapp/php/marketplace.php?sort=${sortBy}`, {
+      const response = await fetch(`https://soultalk-api.ct.ws/marketplace.php?sort=${sortBy}`, {
         credentials: 'include'
       });
       const data = await response.json();
@@ -61,7 +61,7 @@ const Marketplace = () => {
     }
 
     try {
-      const response = await fetch('http://localhost/soulapp/php/marketplace.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/marketplace.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -92,7 +92,7 @@ const Marketplace = () => {
     e.stopPropagation();
 
     try {
-      const response = await fetch('http://localhost/soulapp/php/marketplace.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/marketplace.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

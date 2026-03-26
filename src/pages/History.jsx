@@ -20,7 +20,7 @@ const History = () => {
 
   const loadConversations = async () => {
     try {
-      const response = await fetch('http://localhost/soulapp/php/get_conversations.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/get_conversations.php', {
         credentials: 'include',
       });
 
@@ -64,7 +64,7 @@ const History = () => {
     setDeletingId(conversationId);
 
     try {
-      const response = await fetch('http://localhost/soulapp/php/delete_conversation.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/delete_conversation.php', {
         method: 'DELETE',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

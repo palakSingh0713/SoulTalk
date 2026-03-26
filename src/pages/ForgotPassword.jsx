@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/soulapp/php/get_security_question.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/get_security_question.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -64,7 +64,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/soulapp/php/verify_security_answer.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/verify_security_answer.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -112,7 +112,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/soulapp/php/reset_password_simple.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/reset_password_simple.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
