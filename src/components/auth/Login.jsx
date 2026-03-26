@@ -38,7 +38,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/soulapp/php/login.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

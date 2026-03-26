@@ -56,7 +56,7 @@ export const ChatProvider = ({ children }) => {
     try {
 
       const response = await fetch(
-        `https://soultalk-api.ct.ws/soulapp/php/load_conversation.php?conversation_id=${convId}`,
+        `https://soultalk-api.ct.ws/load_conversation.php?conversation_id=${convId}`,
         { credentials: 'include' }
       );
 
@@ -81,7 +81,7 @@ export const ChatProvider = ({ children }) => {
       try {
 
         const memoryResponse = await fetch(
-          `https://soultalk-api.ct.ws/soulapp/php/memory.php?conversation_id=${convId}`,
+          `https://soultalk-api.ct.ws/memory.php?conversation_id=${convId}`,
           { credentials: 'include' }
         );
 
@@ -170,7 +170,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      await fetch('https://soultalk-api.ct.ws/soulapp/php/memory.php', {
+      await fetch('https://soultalk-api.ct.ws/memory.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -232,7 +232,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch('https://soultalk-api.ct.ws/soulapp/php/ai.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -288,7 +288,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch('https://soultalk-api.ct.ws/soulapp/php/ai.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
