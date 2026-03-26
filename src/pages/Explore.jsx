@@ -33,7 +33,7 @@ const Explore = () => {
     setFilteredCharacters(merged);
 
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/get_private_characters.php', {
+      const response = await fetch('https://soultalk-api.ct.ws/soulapp/php/get_private_characters.php', {
         credentials: 'include'
       });
       const data = await response.json();
