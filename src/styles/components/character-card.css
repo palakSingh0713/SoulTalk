@@ -1,0 +1,285 @@
+/* === CHARACTER CARD === */
+.character-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: var(--radius-3xl);
+  transition: all var(--transition-slow);
+}
+
+.character-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Image Container */
+.character-card-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-slate-800);
+}
+
+.character-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--transition-base), transform var(--transition-slow);
+}
+
+.character-card-image.loaded {
+  opacity: 1;
+}
+
+.character-card:hover .character-card-image {
+  transform: scale(1.1);
+}
+
+/* Image Skeleton Loader */
+.character-card-image-skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    90deg,
+    var(--color-slate-800) 0%,
+    var(--color-slate-700) 50%,
+    var(--color-slate-800) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Fallback Avatar */
+.character-card-fallback {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.character-card-fallback-emoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.character-card-fallback-initials {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Overlays */
+.character-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.95) 0%,
+    rgba(15, 23, 42, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.character-card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.character-card:hover .character-card-hover-overlay {
+  opacity: 1;
+}
+
+.character-card-action-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-2xl);
+}
+
+.character-card-action-icon {
+  color: var(--color-white);
+}
+
+/* Status Badge */
+.character-card-status-badge {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  z-index: 2;
+}
+
+.character-card-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.character-card-status-indicator.online {
+  background: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.character-card-status-text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+}
+
+/* Personality Badge */
+.character-card-personality-badge {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+.character-card-personality-text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  text-transform: capitalize;
+}
+
+/* Content */
+.character-card-content {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.character-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.character-card-name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  margin: 0;
+  transition: all var(--transition-fast);
+}
+
+.character-card:hover .character-card-name {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.character-card-tagline {
+  font-size: var(--font-size-sm);
+  color: var(--color-white-70);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Features */
+.character-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-white-10);
+}
+
+.character-card-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-white-60);
+}
+
+.character-card-feature-icon {
+  flex-shrink: 0;
+}
+
+.character-card-feature-icon.primary {
+  color: var(--color-primary-500);
+}
+
+.character-card-feature-icon.secondary {
+  color: #fbbf24;
+}
+
+.character-card-feature-icon.tertiary {
+  color: #f472b6;
+}
+
+/* Button */
+.character-card-button {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+/* Glow Effect */
+.character-card-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-3xl);
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.character-card:hover .character-card-glow {
+  opacity: 0.3;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .character-card-content {
+    padding: var(--space-5);
+  }
+
+  .character-card-name {
+    font-size: var(--font-size-xl);
+  }
+}
