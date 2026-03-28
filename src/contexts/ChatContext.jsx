@@ -56,7 +56,7 @@ export const ChatProvider = ({ children }) => {
     try {
 
       const response = await fetch(
-        `https://soultalk-api.ct.ws/load_conversation.php?conversation_id=${convId}`,
+        `${import.meta.env.VITE_API_URL}/load_conversation.php?conversation_id=${convId}`,
         { credentials: 'include' }
       );
 
@@ -81,7 +81,7 @@ export const ChatProvider = ({ children }) => {
       try {
 
         const memoryResponse = await fetch(
-          `https://soultalk-api.ct.ws/memory.php?conversation_id=${convId}`,
+          `${import.meta.env.VITE_API_URL}/memory.php?conversation_id=${convId}`,
           { credentials: 'include' }
         );
 
@@ -170,7 +170,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      await fetch('https://soultalk-api.ct.ws/memory.php', {
+      await fetch('${import.meta.env.VITE_API_URL}/memory.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -232,7 +232,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch('https://soultalk-api.ct.ws/ai.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -288,7 +288,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch('https://soultalk-api.ct.ws/ai.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

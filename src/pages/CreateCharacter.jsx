@@ -155,7 +155,7 @@ const CreateCharacter = () => {
     };
     try {
       
-      const response = await fetch('https://soultalk-api.ct.ws/save_character.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/save_character.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

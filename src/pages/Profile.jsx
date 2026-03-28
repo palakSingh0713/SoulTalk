@@ -35,7 +35,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('https://soultalk-api.ct.ws/get_stats.php', {
+        const response = await fetch('${import.meta.env.VITE_API_URL}/get_stats.php', {
           credentials: 'include'
         });
         const data = await response.json();
@@ -92,7 +92,7 @@ const Profile = () => {
     if (!confirm('Delete this character?')) return;
     setDeletingId(characterId);
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/delete_character.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/delete_character.php', {
         method: 'DELETE', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ character_id: characterId })

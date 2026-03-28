@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
 const register = async (name, email, password, securityQuestion, securityAnswer) => {
   try {
-   const response = await fetch('https://soultalk-api.ct.ws/register.php', {
+   const response = await fetch('${import.meta.env.VITE_API_URL}/register.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -49,7 +49,7 @@ const register = async (name, email, password, securityQuestion, securityAnswer)
 
   const logout = async () => {
     try {
-      await fetch('https://soultalk-api.ct.ws/logout.php', {
+      await fetch('${import.meta.env.VITE_API_URL}/logout.php', {
         method: 'POST',
         credentials: 'include'
       });

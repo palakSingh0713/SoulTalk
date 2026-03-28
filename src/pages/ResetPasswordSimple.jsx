@@ -17,7 +17,7 @@ const ResetPasswordSimple = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/get_security_question.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/get_security_question.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -43,7 +43,7 @@ const ResetPasswordSimple = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/verify_security_answer.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/verify_security_answer.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, answer: securityAnswer })
@@ -68,7 +68,7 @@ const ResetPasswordSimple = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/reset_password_simple.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/reset_password_simple.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password: newPassword })

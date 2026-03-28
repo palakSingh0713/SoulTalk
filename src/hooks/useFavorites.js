@@ -11,7 +11,7 @@ export const useFavorites = () => {
 
   const loadFavorites = async () => {
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/favorites.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/favorites.php', {
         credentials: 'include'
       });
       const data = await response.json();
@@ -40,7 +40,7 @@ export const useFavorites = () => {
     }
 
     try {
-      const response = await fetch('https://soultalk-api.ct.ws/favorites.php', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/favorites.php', {
         method: wasFavorite ? 'DELETE' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
