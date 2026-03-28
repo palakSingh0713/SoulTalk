@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../../hooks/useAuth";
 import toast from 'react-hot-toast';
 import AnimatedChatBackground from '../common/AnimatedChatBackground';
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
