@@ -20,7 +20,7 @@ const History = () => {
 
   const loadConversations = async () => {
     try {
-      const response = await fetch(`${API_URL}/get_conversations.php\ {
+      const response = await fetch(`${API_URL}/get_conversations.php`, {
         credentials: 'include',
       });
 
@@ -64,7 +64,7 @@ const History = () => {
     setDeletingId(conversationId);
 
     try {
-      const response = await fetch(`${API_URL}/delete_conversation.php\ {
+      const response = await fetch(`${API_URL}/delete_conversation.php`, {
         method: 'DELETE',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

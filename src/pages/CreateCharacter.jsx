@@ -155,7 +155,7 @@ const CreateCharacter = () => {
     };
     try {
       
-      const response = await fetch(`${API_URL}/save_character.php\ {
+      const response = await fetch(`${API_URL}/save_character.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

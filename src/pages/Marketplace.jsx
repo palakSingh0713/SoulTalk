@@ -61,7 +61,7 @@ const Marketplace = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/marketplace.php\ {
+      const response = await fetch(`${API_URL}/marketplace.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -92,7 +92,7 @@ const Marketplace = () => {
     e.stopPropagation();
 
     try {
-      const response = await fetch(`${API_URL}/marketplace.php\ {
+      const response = await fetch(`${API_URL}/marketplace.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

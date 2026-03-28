@@ -33,7 +33,7 @@ const Explore = () => {
     setFilteredCharacters(merged);
 
     try {
-      const response = await fetch(`${API_URL}/get_private_characters.php\ {
+     fetch(`${API_URL}/get_private_characters.php`, {
         credentials: 'include'
       });
       const data = await response.json();

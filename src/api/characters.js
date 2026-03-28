@@ -18,7 +18,7 @@ const charactersAPI = {
         formData.append(key, characterData[key]);
       });
 
-      const response = await axios.post('/create_story.php\ formData, {
+      const response = await axios.post('/create_story.php formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -31,7 +31,7 @@ const charactersAPI = {
 
   async deleteCharacter(characterId) {
     try {
-      const response = await axios.post('/delete_story.php\ {
+      const response = await axios.post('/delete_story.php {
         id: characterId,
       });
 
