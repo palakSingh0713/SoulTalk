@@ -25,30 +25,30 @@ const Explore = () => {
   useEffect(() => {
     loadCharacters();
   }, []);
-
-  const loadCharacters = async () => {
+const loadCharacters = async () => {
     const customCharacters = JSON.parse(localStorage.getItem('custom_characters') || '[]');
     const publicCustomCharacters = customCharacters.filter(char => char.isPublic);
     const merged = [...CHARACTERS, ...publicCustomCharacters];
     setAllCharacters(merged);
     setFilteredCharacters(merged);
 
-    const response = await fetch(`${API_URL}/get_private_characters.php`, {
-      credentials: 'include'
-    });
-    const data = await response.json();
+    try {
+      const response = await fetch(`${API_URL}/get_private_characters.php`, {
+        credentials: 'include'
+      });
+      const data = await response.json();
 
-    if (data.success && data.characters?.length > 0) {
-      const existingIds = merged.map(c => c.id);
-      const newFromDB = data.characters.filter(c => !existingIds.includes(c.id));
-      const finalMerged = [...merged, ...newFromDB];
-      setAllCharacters(finalMerged);
-      setFilteredCharacters(finalMerged);
+      if (data.success && data.characters?.length > 0) {
+        const existingIds = merged.map(c => c.id);
+        const newFromDB = data.characters.filter(c => !existingIds.includes(c.id));
+        const finalMerged = [...merged, ...newFromDB];
+        setAllCharacters(finalMerged);
+        setFilteredCharacters(finalMerged);
+      }
+    } catch (error) {
+      console.error('Failed to fetch DB characters:', error);
     }
-  } catch (error) {
-    console.error('Failed to fetch DB characters:', error);
-  }
-};
+  };
 
 useEffect(() => {
   let filtered = allCharacters;
