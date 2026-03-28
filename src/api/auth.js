@@ -5,7 +5,7 @@ const authAPI = {
 
   async login(email, password) {
     try {
-      const response = await axios.post('/login.php',
+      const response = await axios.post('/login.php\
         { email, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -21,7 +21,7 @@ const authAPI = {
 
   async register(name, email, password, securityQuestion, securityAnswer) {
     try {
-      const response = await axios.post('/register.php',
+      const response = await axios.post('/register.php\
         { name, email, password, securityQuestion, securityAnswer },
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -49,7 +49,7 @@ const authAPI = {
 
   async updateProfile(data) {
     try {
-      const response = await axios.post('/profile.php',
+      const response = await axios.post('/profile.php\
         data,
         { headers: { 'Content-Type': 'application/json' } }
       );

@@ -3,7 +3,7 @@ import axios from './axios';
 const chatAPI = {
   async sendMessage(message, characterId) {
     try {
-      const response = await axios.post('/ai.php', {
+      const response = await axios.post('/ai.php\ {
         message: message,
         bot: characterId,
       });
@@ -20,7 +20,7 @@ const chatAPI = {
 
   async getIntroMessage(characterId) {
     try {
-      const response = await axios.post('/ai.php', {
+      const response = await axios.post('/ai.php\ {
         message: '__intro__',
         bot: characterId,
       });

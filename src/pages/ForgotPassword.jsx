@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/get_security_question.php', {
+      const response = await fetch(`${API_URL}/get_security_question.php\ {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -64,7 +64,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/verify_security_answer.php', {
+      const response = await fetch(`${API_URL}/verify_security_answer.php\ {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -112,7 +112,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/reset_password_simple.php', {
+      const response = await fetch(`${API_URL}/reset_password_simple.php\ {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

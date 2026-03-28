@@ -170,7 +170,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      await fetch('${import.meta.env.VITE_API_URL}/memory.php', {
+      await fetch(`${API_URL}/memory.php\ {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -232,7 +232,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch('${import.meta.env.VITE_API_URL}/ai.php', {
+      const response = await fetch(`${API_URL}/ai.php\ {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -288,7 +288,7 @@ export const ChatProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch('${import.meta.env.VITE_API_URL}/ai.php', {
+      const response = await fetch(`${API_URL}/ai.php\ {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
