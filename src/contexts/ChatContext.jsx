@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL;
 import { createContext, useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import voiceService from '../services/voiceService';

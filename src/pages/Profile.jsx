@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL;
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 

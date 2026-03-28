@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL;
 import { useState, useRef } from 'react';
 import { Upload, User, FileText, Sparkles, X, MessageSquare, Lock, Globe, Edit3 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

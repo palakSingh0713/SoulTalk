@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL;
 import { useState, useEffect } from 'react';
 import { Download, Heart, Users, TrendingUp, Clock, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

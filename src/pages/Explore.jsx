@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL;
 import { useEffect, useState } from 'react';
 import { Search, Plus, Star, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';

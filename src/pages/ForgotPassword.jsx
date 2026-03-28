@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL;
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Shield, Lock, ArrowLeft, ArrowRight, Check } from 'lucide-react';
