@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
+import { useAuth } from '../context/AuthContext';
 import { useState, useEffect } from 'react';
 import { Search, Calendar, Eye, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -10,20 +11,25 @@ import toast from 'react-hot-toast';
 const History = () => {
   const navigate = useNavigate();
   const { selectCharacter } = useChat();
-  
+  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [conversations, setConversations] = useState([]);
   const [deletingId, setDeletingId] = useState(null);
 
-  useEffect(() => {
+useEffect(() => {
+  if (user?.email) {
     loadConversations();
-  }, []);
+  }
+}, [user]);
 
   const loadConversations = async () => {
     try {
-      const response = await fetch(`${API_URL}/get_conversations.php`, {
-        credentials: 'include',
-      });
+     const response = await fetch(`${API_URL}/get_conversations.php`, {
+  method: 'POST',
+  credentials: 'include',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ user_email: user?.email })
+});
 
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
