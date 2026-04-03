@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import toast from 'react-hot-toast';
 const API_URL = import.meta.env.VITE_API_URL;
 export const AuthContext = createContext(null);
@@ -84,3 +84,5 @@ const register = async (name, email, password, securityQuestion, securityAnswer)
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);
