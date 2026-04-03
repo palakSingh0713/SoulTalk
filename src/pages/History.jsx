@@ -17,6 +17,7 @@ const History = () => {
   const [deletingId, setDeletingId] = useState(null);
 
 useEffect(() => {
+  console.log('user is:', user);
   if (user?.email) {
     loadConversations();
   }
