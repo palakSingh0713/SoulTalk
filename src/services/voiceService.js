@@ -24,8 +24,8 @@ class VoiceService {
 
     let voiceType = character.voiceType || 'female';
 
-    const femaleName = /^(palak|aira|luna|maya|victoria|samantha|zira|susan|karen|moira|tessa|female)/i;
-    const maleName = /^(noah|eli|sage|atlas|kai|david|mark|george|daniel|male)/i;
+    const femaleName = /^(palak|aira|luna|maya|victoria|samantha|zira|susan|karen|moira|lisa|tessa|female)/i;
+    const maleName = /^(noah|eli|sage|atlas|kai|david|mark|george|daniel|namjoon|milo|jake|Theo|male)/i;
 
     if (femaleName.test(character.name)) {
       voiceType = 'female';
