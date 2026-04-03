@@ -1,8 +1,10 @@
 const API_URL = import.meta.env.VITE_API_URL;
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useAuth } from '../contexts/AuthContext';
 
 export const useFavorites = () => {
+  const { user } = useAuth();
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,8 +15,11 @@ export const useFavorites = () => {
   const loadFavorites = async () => {
     try {
       const response = await fetch(`${API_URL}/favorites.php`, {
-        credentials: 'include'
-      });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'include',
+  body: JSON.stringify({ user_email: user?.email, action: 'get' })
+});
       const data = await response.json();
       if (data.success) {
         setFavorites(data.favorites || []);
