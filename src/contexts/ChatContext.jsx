@@ -1,4 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
 import { createContext, useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import voiceService from '../services/voiceService';
@@ -11,7 +13,7 @@ const generateId = () => {
 };
 
 export const ChatProvider = ({ children }) => {
-
+  const { user } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
 
   const [currentCharacter, setCurrentCharacter] = useState(null);
@@ -23,9 +25,9 @@ export const ChatProvider = ({ children }) => {
   const isLoadingRef = useRef(false);
   const loadedConversationRef = useRef(null);
 
-  
+
   // LOAD FROM URL
-  
+
   useEffect(() => {
     const convId = searchParams.get('conversation_id');
 
@@ -34,17 +36,17 @@ export const ChatProvider = ({ children }) => {
       return;
     }
 
-    
+
     if (loadedConversationRef.current === convId) return;
     if (isLoadingRef.current) return;
 
     loadConversation(convId);
 
-  }, [searchParams]); 
+  }, [searchParams]);
 
-  
+
   // LOAD CONVERSATION
-  
+
   const loadConversation = async (convId) => {
 
     if (isLoadingRef.current) return;
@@ -65,7 +67,7 @@ export const ChatProvider = ({ children }) => {
 
       if (data.messages?.length > 0) {
 
-        
+
         const formatted = data.messages.map(msg => ({
           id: generateId(),
           text: msg.message,
@@ -92,7 +94,7 @@ export const ChatProvider = ({ children }) => {
           setConversationMemory(memoryData.memory);
         }
 
-      } catch {}
+      } catch { }
 
     } catch (err) {
 
@@ -106,15 +108,15 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
- 
+
   // SELECT CHARACTER
-  
+
   const selectCharacter = (character, source = 'unknown', isHistoryMode = false) => {
 
     setCurrentCharacter(character);
 
     if (isHistoryMode) {
-      return; 
+      return;
     }
 
     // Fresh new chat
@@ -147,14 +149,14 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
-  
+
   // MEMORY UPDATE FUNCTION
-  
+
   const updateConversationMemory = async () => {
-      console.log("🧠 updateConversationMemory called");
-  console.log("conversationId:", conversationId);
-  console.log("messages.length:", messages.length);
-  console.log("character id:", currentCharacter?.id);
+    console.log("🧠 updateConversationMemory called");
+    console.log("conversationId:", conversationId);
+    console.log("messages.length:", messages.length);
+    console.log("character id:", currentCharacter?.id);
 
 
     if (!conversationId || messages.length < 3) return;
@@ -162,7 +164,7 @@ export const ChatProvider = ({ children }) => {
     const memory = extractMemoryFromConversation(messages);
     if (!memory) return;
 
-    
+
     const characterId = currentCharacter?.id;
     if (!characterId) {
       console.warn('Memory update skipped: no character id');
@@ -181,7 +183,8 @@ export const ChatProvider = ({ children }) => {
           memory_summary: memory.summary,
           key_topics: memory.keyTopics,
           user_preferences: memory.userPreferences,
-          emotional_tone: memory.emotionalTone
+          emotional_tone: memory.emotionalTone,
+           user_email: user?.email
         })
       });
 
@@ -194,15 +197,15 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
- 
+
   // AUTO MEMORY UPDATE
-  
+
   useEffect(() => {
 
     if (!conversationId) return;
     if (messages.length < 3) return;
 
-    
+
     if (conversationId.startsWith('conv_')) return;
 
     if (messages.length % 5 === 0) {
@@ -212,9 +215,9 @@ export const ChatProvider = ({ children }) => {
 
   }, [messages, conversationId]);
 
-  
+
   // SEND MESSAGE
-  
+
   const sendMessage = async (text) => {
 
     if (!text.trim() || !currentCharacter) return;
@@ -241,13 +244,14 @@ export const ChatProvider = ({ children }) => {
           message: text.trim(),
           memory: memoryPrompt,
           conversation_id: conversationId,
-          character: currentCharacter
+          character: currentCharacter,
+          user_email: user?.email
         }),
       });
 
       const data = await response.json();
 
-      
+
       if (data.conversation_id && data.conversation_id !== conversationId) {
         setConversationId(data.conversation_id);
       }
@@ -274,9 +278,9 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
-  
+
   // REGENERATE MESSAGE
-  
+
   const regenerateMessage = async (messageIndex) => {
 
     if (messageIndex < 1 || !currentCharacter) return;
@@ -295,8 +299,10 @@ export const ChatProvider = ({ children }) => {
         credentials: 'include',
         body: JSON.stringify({
           message: userMessage.text,
+          memory: memoryPrompt,
           conversation_id: conversationId,
-          character: currentCharacter
+          character: currentCharacter,
+          user_email: user?.email
         })
       });
 
