@@ -16,21 +16,21 @@ const History = () => {
   const [conversations, setConversations] = useState([]);
   const [deletingId, setDeletingId] = useState(null);
 
-useEffect(() => {
-  console.log('user is:', user);
-  if (user?.email) {
-    loadConversations();
-  }
-}, [user]);
+  useEffect(() => {
+    console.log('user is:', user);
+    if (user?.email) {
+      loadConversations();
+    }
+  }, [user]);
 
   const loadConversations = async () => {
     try {
-     const response = await fetch(`${API_URL}/get_conversations.php`, {
-  method: 'POST',
-  credentials: 'include',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ user_email: user?.email })
-});
+      const response = await fetch(`${API_URL}/get_conversations.php`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_email: user?.email })
+      });
 
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
@@ -39,14 +39,14 @@ useEffect(() => {
       }
 
       const data = await response.json();
-
+      console.log('API response:', data);
       if (data.conversations && data.conversations.length > 0) {
         const customChars = JSON.parse(localStorage.getItem('custom_characters') || '[]');
         const allCharacters = [...CHARACTERS, ...customChars];
 
         const enrichedConversations = data.conversations.map(conv => {
           const character = allCharacters.find(c => c.id === conv.character_id);
-          
+
           return {
             ...conv,
             characterName: character?.name || conv.character_id || 'Unknown',
@@ -54,7 +54,7 @@ useEffect(() => {
             character: character,
           };
         });
-        
+
         setConversations(enrichedConversations);
       }
     } catch (error) {
@@ -64,7 +64,7 @@ useEffect(() => {
 
   const handleDeleteConversation = async (conversationId, e) => {
     e.stopPropagation();
-    
+
     if (!confirm('Delete this conversation? This cannot be undone.')) {
       return;
     }
@@ -100,18 +100,18 @@ useEffect(() => {
     conv.last_message?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
- 
+
   const handleOpenConversation = (conversation) => {
     const customChars = JSON.parse(localStorage.getItem('custom_characters') || '[]');
     const allCharacters = [...CHARACTERS, ...customChars];
     const character = allCharacters.find(c => c.id === conversation.character_id);
-    
+
     if (character) {
       console.log('🔓 Opening:', conversation.conversation_id, 'for', character.name);
-      
+
       // Step 1: Set character in context (isHistoryMode=true = don't clear messages)
       selectCharacter(character, 'History.handleOpenConversation', true);
-      
+
       // Step 2: Navigate immediately — no delay needed
       navigate(`/chat?conversation_id=${conversation.conversation_id}`);
     } else {
@@ -131,7 +131,7 @@ useEffect(() => {
   return (
     <div className="page-with-navbar">
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 20px' }}>
-        
+
         <div style={{ textAlign: 'center', padding: '40px 0' }}>
           <h1 style={{ fontSize: '2.5rem', marginBottom: '12px' }}>
             Chat <span className="text-gradient">History</span>
@@ -143,7 +143,7 @@ useEffect(() => {
 
         <div style={{ marginBottom: '40px' }}>
           <div style={{ position: 'relative', marginBottom: '20px' }}>
-            <Search 
+            <Search
               style={{
                 position: 'absolute',
                 left: '16px',
@@ -151,8 +151,8 @@ useEffect(() => {
                 transform: 'translateY(-50%)',
                 color: 'rgba(255, 255, 255, 0.4)',
                 pointerEvents: 'none'
-              }} 
-              size={20} 
+              }}
+              size={20}
             />
             <input
               type="text"
@@ -203,8 +203,8 @@ useEffect(() => {
               >
                 <div className="avatar avatar-lg">
                   {conversation.characterImage ? (
-                    <img 
-                      src={conversation.characterImage} 
+                    <img
+                      src={conversation.characterImage}
                       alt={conversation.characterName}
                     />
                   ) : null}
@@ -223,9 +223,9 @@ useEffect(() => {
                       <span>{formatDate(conversation.last_updated)}</span>
                     </div>
                   </div>
-                  <p style={{ 
-                    fontSize: '14px', 
-                    color: 'rgba(255, 255, 255, 0.7)', 
+                  <p style={{
+                    fontSize: '14px',
+                    color: 'rgba(255, 255, 255, 0.7)',
                     margin: '0 0 8px 0',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -286,7 +286,7 @@ useEffect(() => {
               <div style={{ fontSize: '4rem', marginBottom: '20px' }}>💬</div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '12px' }}>No conversations found</h3>
               <p style={{ color: 'rgba(255, 255, 255, 0.6)', marginBottom: '32px' }}>
-                {searchQuery 
+                {searchQuery
                   ? 'Try adjusting your search query'
                   : 'Start chatting to see your history'}
               </p>
