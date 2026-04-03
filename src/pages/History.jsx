@@ -1,5 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import { Search, Calendar, Eye, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
